@@ -9,7 +9,6 @@
 .upper-panel {
     width: 100%;
     height: 70px;
-    // border: 2px solid black;
     box-sizing: border-box;
 
     display: flex;
@@ -21,7 +20,18 @@
     width: 45%;
     background: grey;
     margin-left: 3.5px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &-text {
+        font-size: 1.9rem;
+        font-weight: bold;
+    }
 }
+
+//volume slider styling
 
 .volume-panel {
     flex-grow: 1;
@@ -30,12 +40,29 @@
     justify-content: center;
 }
 
-.volume-button {
+.volume-slider {
     width: 90%;
-    height: 2px;
-    background-color: black;
-    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: transparent;
 }
+
+.volume-slider::-webkit-slider-runnable-track {
+    -webkit-apperance: none;
+    background: rgb(194, 194, 194);
+    border-radius: 15px;
+    height: 5px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background: grey;
+    margin-top: -5px;
+}
+
 
 .lower-panel {
     display: flex;
@@ -49,22 +76,67 @@
     width: 60%;
     height: 318px;
 
-    // border: 2px solid black;
-
     & button {
         width: 33%;
         border: none;
         background-color: rgb(206, 168, 45);
 
         font-size: 2rem;
-
-        &:active {
-            background-color: rgb(126, 103, 29);
-        }
     }
 }
 
+//switch styling
+
 .switch-panel {
-    border: 2px solid black;
     flex-grow: 1;
+    flex-flow: column;
+    display: inherit;
+    border: 2px solid rgb(126, 103, 29);
+
+    & p {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+}
+
+.switch-box {
+    display: inherit;
+    justify-content: center;
+    margin-top: 70px;
+    height: 100%;
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    background-color: rgb(194, 194, 194);
+    border-radius: 20px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 38px;
+        height: 38px;
+        background-color: grey;
+        border-radius: 20px;
+        top: 1px;
+        left: 1px;
+        transition: all 0.5s;
+    }
+}
+
+.switch {
+    display: none;
+}
+
+.switch:checked + .toggle {
+    background-color: rgb(167, 167, 167);
+
+    &::after {
+        left: 80px;
+    }
 }
