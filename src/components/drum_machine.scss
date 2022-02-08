@@ -140,3 +140,14 @@
         left: 80px;
     }
 }
+
+@media (max-width: 700px) {
+    
+    .drum-pad button {
+        width: 32.5%;
+    }
+
+    .display-text {
+        font-size: 7vw;
+    }
+}

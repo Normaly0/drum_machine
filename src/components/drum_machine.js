@@ -64,85 +64,92 @@ class Drum_Machine extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            sound: '',
+            volume: 0.5
         };
-        this.handleChange = this.handleChange.bind(this)
+        this.handleSwitch = this.handleSwitch.bind(this);
+        this.checkKey = this.checkKey.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleClickPlay = this.handleClickPlay.bind(this);
+        this.changeBackground = this.changeBackground.bind(this);
+        this.revertBackground = this.revertBackground.bind(this);
+        this.changeVolume = this.changeVolume.bind(this);
     };
 
-    handleChange() {
-
+    handleSwitch(e) {
+        if(e.target.checked === true) {
+            document.addEventListener('keypress', this.checkKey);
+            document.addEventListener('keydown', this.changeBackground);
+            document.addEventListener('keyup', this.revertBackground);
+        } else {
+            document.removeEventListener('keypress', this.checkKey);
+            document.removeEventListener('keydown', this.changeBackground);
+            document.removeEventListener('keyup', this.revertBackground);
+        }
     }
 
-    render() {
+    checkKey(e) {
+        let currentKey = e.code
 
-        
-        let sound = ''
-        let volume = 0.5       
+        if (sounds.some(element => element.key === currentKey)) {
+            let obj = sounds.find(obj => obj.key === currentKey);
+            this.setState({
+                sound: new Audio(obj.src)
+            })
+            this.state.sound.volume = this.state.volume;
+            this.state.sound.play();
+            document.getElementById('display-text').innerHTML = obj.name
+        } 
+    }
 
-        function handleSwitch(e) {
-            if(e.target.checked === true) {
-                document.addEventListener('keypress', checkKey);
-                document.addEventListener('keydown', changeBackground);
-                document.addEventListener('keyup', revertBackground);
-            } else {
-                document.removeEventListener('keypress', checkKey);
-                document.removeEventListener('keydown', changeBackground);
-                document.removeEventListener('keyup', revertBackground);
+    handleClick(e) {
+        if (document.getElementById('switch').checked === true) {
+            let obj = sounds.find(obj => obj.key === e.target.id);
+            this.setState({
+                sound: new Audio(obj.src)
+            }, this.handleClickPlay)
+
+            document.getElementById('display-text').innerHTML = obj.name;
+            function hightLight(obj) {
+                let el = document.getElementById(obj.key)
+                let original = el.style.backgroundColor;
+                el.style.backgroundColor = 'rgb(126, 103, 29)';
+                setTimeout(function() {
+                    el.style.backgroundColor = original;
+                }, 50)
             }
+            hightLight(obj)
         }
+    }
 
+    handleClickPlay() {
+        this.state.sound.volume = this.state.volume;
+        this.state.sound.play();
+    }
 
-        function checkKey(e) {
-            let currentKey = e.code
-
-            if (sounds.some(element => element.key === currentKey)) {
-                let obj = sounds.find(obj => obj.key === currentKey);
-                sound = new Audio(obj.src);
-                sound.volume = volume;
-                sound.play();
-                document.getElementById('display-text').innerHTML = obj.name
-            } 
+    changeBackground(e) {
+        if (document.getElementById(e.code) === null) {
+            return
+        } else {
+            document.getElementById(e.code).style.backgroundColor = 'rgb(126, 103, 29)';
         }
+    }
 
-        function handleClick(e) {
-            if (document.getElementById('switch').checked === true) {
-                let obj = sounds.find(obj => obj.key === e.target.id);
-                sound = new Audio(obj.src);
-                sound.volume = volume;
-                sound.play();
-                document.getElementById('display-text').innerHTML = obj.name;
-                function hightLight(obj) {
-                    let el = document.getElementById(obj.key)
-                    let original = el.style.backgroundColor;
-                    el.style.backgroundColor = 'rgb(126, 103, 29)';
-                    setTimeout(function() {
-                        el.style.backgroundColor = original;
-                    }, 50)
-                }
-                hightLight(obj)
-            }
+    revertBackground(e){
+        if (document.getElementById(e.code) === null) {
+            return
+        }   else {
+            document.getElementById(e.code).style.backgroundColor = 'rgb(206, 168, 45)';
         }
+    }
 
-        function changeVolume(e) {
-            volume = e.target.value
-        }
+    changeVolume(e) {
+        this.setState({
+            volume: e.target.value
+        })
+    }
 
-        function changeBackground(e) {
-            if (document.getElementById(e.code) === null) {
-                return
-            } else {
-                document.getElementById(e.code).style.backgroundColor = 'rgb(126, 103, 29)';
-            }
-        }
-
-        function revertBackground(e){
-            if (document.getElementById(e.code) === null) {
-                return
-            }   else {
-                document.getElementById(e.code).style.backgroundColor = 'rgb(206, 168, 45)';
-            }
-        }
-
+    render(){
         return (
             <div className = 'drum-panel'>
                 <div className = 'upper-panel'>
@@ -151,7 +158,7 @@ class Drum_Machine extends React.Component {
                     </div>
                     <div className = 'volume-panel'>
                         <input 
-                            onChange={changeVolume}
+                            onChange={this.changeVolume}
                             max = '1'
                             min = '0'
                             step = '0.01'
@@ -162,15 +169,15 @@ class Drum_Machine extends React.Component {
                 </div>
                 <div className = 'lower-panel'>
                     <div className = 'drum-pad' id = 'drum-pad'>
-                        <button type = 'button' id = 'KeyQ' onClick = {handleClick}>Q</button>
-                        <button type = 'button' id = 'KeyW' onClick = {handleClick}>W</button>
-                        <button type = 'button' id = 'KeyE' onClick = {handleClick}>E</button>
-                        <button type = 'button' id = 'KeyA' onClick = {handleClick}>A</button>
-                        <button type = 'button' id = 'KeyS' onClick = {handleClick}>S</button>
-                        <button type = 'button' id = 'KeyD' onClick = {handleClick}>D</button>
-                        <button type = 'button' id = 'KeyZ' onClick = {handleClick}>Z</button>
-                        <button type = 'button' id = 'KeyX' onClick = {handleClick}>X</button>
-                        <button type = 'button' id = 'KeyC' onClick = {handleClick}>C</button>
+                        <button type = 'button' id = 'KeyQ' onClick = {this.handleClick}>Q</button>
+                        <button type = 'button' id = 'KeyW' onClick = {this.handleClick}>W</button>
+                        <button type = 'button' id = 'KeyE' onClick = {this.handleClick}>E</button>
+                        <button type = 'button' id = 'KeyA' onClick = {this.handleClick}>A</button>
+                        <button type = 'button' id = 'KeyS' onClick = {this.handleClick}>S</button>
+                        <button type = 'button' id = 'KeyD' onClick = {this.handleClick}>D</button>
+                        <button type = 'button' id = 'KeyZ' onClick = {this.handleClick}>Z</button>
+                        <button type = 'button' id = 'KeyX' onClick = {this.handleClick}>X</button>
+                        <button type = 'button' id = 'KeyC' onClick = {this.handleClick}>C</button>
                     </div>
                     <div className = 'switch-panel'>
                         <p>Power</p>
@@ -179,10 +186,10 @@ class Drum_Machine extends React.Component {
                                 className = 'switch' 
                                 id = 'switch'
                                 type = 'checkbox'
-                                onClick = {handleSwitch}
+                                onClick = {this.handleSwitch}
                                 />
                             <label
-                                for = 'switch'
+                                htmlFor = 'switch'
                                 className = 'toggle'/>
                         </div>
                     </div>

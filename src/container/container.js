@@ -14,6 +14,7 @@ class Container extends React.Component {
                     <div className = 'machine'>
                         <Drum_Machine />
                     </div>
+                    <p className = 'container-box-credit'>Coded by Normaly</p>
                 </div>
             </div>
         )
