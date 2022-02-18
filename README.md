@@ -2,12 +2,12 @@
 
 # Drum Machine App
 
-A drum machine SPA allowing you to operate it both with your keyboard and mouse including an adjustible volume slider, display to show the sound that was played last, as well as power button to enable it's functionalities.
+A drum machine SPA allows you to operate it both with your keyboard and mouse including an adjustable volume slider, display to show the sound that was played last, as well as power button to enable it's functionalities.
 
 ## About
 
-This applicaton was build using the react framework and it's class based component system.
-All it's functionalities rely on the application managing and changing it's own state based on the users input.
+This application was built using the react framework and it's class based component system.
+All it's functionalities rely on the application managing and changing its own state based on the user's input.
 
 It was quite interesting to fully rely on react to solve the challenges that I've faced throughout this project instead of combining it with redux, the biggest one most likely being making the drum machine operable via keyboard and mouse, without that leading to bugs.
 Therefore all functionalities of the page are bundled together in one file rather than spread out over several files.
