@@ -1,4 +1,4 @@
-https://img.shields.io/github/languages/top/Normaly0/drum_machine
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Normaly0/drum_machine">
 https://img.shields.io/node/v/v
 https://img.shields.io/badge/npm-v8.1.0-blue
 https://img.shields.io/badge/License-GPL%202.0-orange
