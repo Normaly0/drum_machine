@@ -1,10 +1,12 @@
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Normaly0/drum_machine"> <img alt="node-current" src="https://img.shields.io/node/v/v"> <img alt="npm version" src="https://img.shields.io/badge/npm-v8.1.0-blue"> <img alt="license" src="https://img.shields.io/badge/License-GPL%20-orange">
 
-# Drum Machine App
+# :drum: Drum Machine App
 
 A drum machine SPA allows you to operate it both with your keyboard and mouse including an adjustable volume slider, display to show the sound that was played last, as well as power button to enable it's functionalities.
 
-## About
+Check out a live version [here](https://codepen.io/Normaly0/full/KKyXdoY)!
+
+## :mag: About
 
 This application was built using the react framework and it's class based component system.
 All it's functionalities rely on the application managing and changing its own state based on the user's input.
@@ -12,13 +14,14 @@ All it's functionalities rely on the application managing and changing its own s
 It was quite interesting to fully rely on react to solve the challenges that I've faced throughout this project instead of combining it with redux, the biggest one most likely being making the drum machine operable via keyboard and mouse, without that leading to bugs.
 Therefore all functionalities of the page are bundled together in one file rather than spread out over several files.
 
-Future ideas:
+## :clipboard: Ideas
+
 - implement a loop system
 - design overhaul
 - create a second sound deck that could be swapped around
 
 
-## How To Run
+## :wrench: How To Run
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Therefore make sure that you have [Node.js](https://nodejs.org/en/) installed.
@@ -29,11 +32,6 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
